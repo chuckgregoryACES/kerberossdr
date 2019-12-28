@@ -1,0 +1,11 @@
+strategy
+synchronize radio samples
+search stream of samples (on all 4 radio channels) for ADS-B message header
+if ads-b header found then do doa and decode message. save doa and decoded message with enrichment to database
+
+translate ICAO to useful aircraft information: https://junzis.com/adb/
+
+tasks
+figure out how to print from hydra_signal_processor
+modify KerberosSDR software to output stream of data to see what format it's in, how it works
+search stream for ads-b header, possibly use pymodes?

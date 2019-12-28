@@ -57,6 +57,8 @@ from pyapril import clutterCancellation as cc
 from pyapril import detector as det
 from pyapril.hitProcessor import CA_CFAR
 
+from pymongo import MongoClient
+
 class SignalProcessor(QtCore.QThread):
 
     signal_spectrum_ready = QtCore.pyqtSignal()
@@ -65,6 +67,10 @@ class SignalProcessor(QtCore.QThread):
     signal_overdrive = QtCore.pyqtSignal(int)
     signal_period    = QtCore.pyqtSignal(float)
     signal_PR_ready = QtCore.pyqtSignal()
+
+    client = MongoClient('mongodb://localhost:27017')
+    db = client['signals']
+
     def __init__(self, parent=None, module_receiver=None):
         """
             Description:
@@ -158,7 +164,7 @@ class SignalProcessor(QtCore.QThread):
 
             # Download samples
             #if(self.en_sync or self.en_spectrum):
-            time.sleep(0.25) # You can play with this value, but it may affect stability
+            time.sleep(10.25) # You can play with this value, but it may affect stability
 
             self.module_receiver.download_iq_samples()
 
@@ -349,8 +355,13 @@ class SignalProcessor(QtCore.QThread):
                 self.DOA_MEM_res = de.DOA_MEM(R, scanning_vectors,  column_select = 0)
             if self.en_DOA_MUSIC:
                 self.DOA_MUSIC_res = de.DOA_MUSIC(R, scanning_vectors, signal_dimension = 1)
+                doa_collection = db.doa
+                doa_data = {
+                    'iq_samples' : iq_samples,
+                }
+                doa_collection.insert(doa_data)
 
-        print(self.DOA_MUSIC_res)
+        #print(self.DOA_MUSIC_res)
 
 
     def PR_processing(self):
@@ -379,7 +390,6 @@ class SignalProcessor(QtCore.QThread):
         #print("[ DONE ] Range-Doppler processing finished")
     def stop(self):
         self.run_processing = False
-
 
 def busy_wait(dt):
     current_time = time.time()
