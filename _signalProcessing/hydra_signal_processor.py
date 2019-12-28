@@ -57,7 +57,7 @@ from pyapril import clutterCancellation as cc
 from pyapril import detector as det
 from pyapril.hitProcessor import CA_CFAR
 
-from pymongo import MongoClient
+#from pymongo import MongoClient
 
 class SignalProcessor(QtCore.QThread):
 
@@ -355,11 +355,11 @@ class SignalProcessor(QtCore.QThread):
                 self.DOA_MEM_res = de.DOA_MEM(R, scanning_vectors,  column_select = 0)
             if self.en_DOA_MUSIC:
                 self.DOA_MUSIC_res = de.DOA_MUSIC(R, scanning_vectors, signal_dimension = 1)
-                doa_collection = db.doa
-                doa_data = {
-                    'iq_samples' : iq_samples,
-                }
-                doa_collection.insert(doa_data)
+                # doa_collection = db.doa
+                # doa_data = {
+                #     'iq_samples' : iq_samples,
+                # }
+                # doa_collection.insert(doa_data)
 
         #print(self.DOA_MUSIC_res)
 
