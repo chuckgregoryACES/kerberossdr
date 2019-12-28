@@ -190,8 +190,8 @@ class ReceiverRTLSDR():
             self.iq_samples -= (1 + 1j)
 
 
-
-            np.save("hydra_raw.npy",self.iq_samples[0,:])
+            self.iq_samples[0,:].tofile("samples.out")
+            #np.save("hydra_raw.npy",self.iq_samples[0,:])
             self.iq_preprocessing()
             #print("[ DONE] IQ sample read ready")
 
