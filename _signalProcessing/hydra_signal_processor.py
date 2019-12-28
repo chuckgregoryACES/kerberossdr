@@ -68,8 +68,8 @@ class SignalProcessor(QtCore.QThread):
     signal_period    = QtCore.pyqtSignal(float)
     signal_PR_ready = QtCore.pyqtSignal()
 
-    client = MongoClient('mongodb://localhost:27017')
-    db = client['signals']
+    #client = MongoClient('mongodb://localhost:27017')
+    #db = client['signals']
 
     def __init__(self, parent=None, module_receiver=None):
         """
