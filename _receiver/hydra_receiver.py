@@ -189,10 +189,14 @@ class ReceiverRTLSDR():
             self.iq_samples /= (255 / 2)
             self.iq_samples -= (1 + 1j)
 
-            found = np.where(byte_data_np == 141)
+
+            byte_data_np.tobytes()
+
+            found = np.where(byte_data_np == 'x8D')
 
             if found is not None:
-                byte_data_np.tofile("byte-data.out")
+                byte_data_np.tofile("bytedata.out")
+
 
             #np.save("hydra_raw.npy",self.iq_samples[0,:])
             self.iq_preprocessing()
