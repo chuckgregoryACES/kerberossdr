@@ -195,7 +195,7 @@ class ReceiverRTLSDR():
             found = np.where(byte_data_np == 'x8D')
 
             if found is not None:
-                print(found)
+                print("found")
                 byte_data_np.tofile("bytedata.out")
 
 
