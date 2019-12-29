@@ -159,7 +159,6 @@ class ReceiverRTLSDR():
             overdrive_margin = 0.95
             self.overdrive_detect_flag = False
 
-            #map the byte_array_read buffer into a 1 dimensional array of bytes in decimal format [x255,x128,x64,etc]
             byte_data_np = np.frombuffer(byte_array_read, dtype='uint8', count=read_size)
 
             self.iq_samples.real = byte_data_np[0:self.channel_number*self.block_size:2].reshape(self.channel_number, self.block_size//2)
@@ -197,7 +196,7 @@ class ReceiverRTLSDR():
             # np.save("real", self.iq_samples.real[1,:])
             # print("real:")
             # print(self.iq_samples.real[1,:])
-            np.save("imag", self.iq_samples.imag[0])
+            np.save("imag", self.iq_samples.imag[1])
             print("imaginary:")
             print(self.iq_samples.imag[0])
             # np.save("iq_samples", self.iq_samples)
