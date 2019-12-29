@@ -198,6 +198,7 @@ class ReceiverRTLSDR():
             # print(self.iq_samples.real[1,:])
             np.save("imag", self.iq_samples.imag)
             np.save("real", self.iq_samples.real)
+            np.savetxt("iq_samples", self.iq_samples, delimiter="")
             # print("imaginary:")
             # print(self.iq_samples.imag)
             # np.save("iq_samples", self.iq_samples)
