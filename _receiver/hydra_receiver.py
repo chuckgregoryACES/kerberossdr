@@ -194,15 +194,15 @@ class ReceiverRTLSDR():
             self.iq_preprocessing()
             #print("[ DONE] IQ sample read ready")
 
-            np.save("real", self.iq_samples.real)
-            print("real:")
-            print(self.iq_samples.real)
-            np.save("imag", self.iq_samples.imag)
+            # np.save("real", self.iq_samples.real[1,:])
+            # print("real:")
+            # print(self.iq_samples.real[1,:])
+            np.save("imag", self.iq_samples.imag[0])
             print("imaginary:")
-            print(self.iq_samples.imag)
-            np.save("iq_samples", self.iq_samples)
-            print("iq_samples:")
-            print(self.iq_samples)
+            print(self.iq_samples.imag[0])
+            # np.save("iq_samples", self.iq_samples)
+            # print("iq_samples:")
+            # print(self.iq_samples)
 
 
 
